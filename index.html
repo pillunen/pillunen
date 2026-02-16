@@ -1,76 +1,325 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillunen Photography</title>
+
+<title>pill.unen</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
+    background: #0e0e0e;
+    color: #f2f2ee;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
 }
-header {
-    padding: 40px;
-    font-size: 2rem;
-    letter-spacing: 3px;
+
+/* MENU BUTTON */
+
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1000;
 }
+
+/* MENU OVERLAY */
+
+.menu {
+    position: fixed;
+    inset: 0;
+    background: #0e0e0e;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 999;
+}
+
+.menu a {
+    color: #f2f2ee;
+    text-decoration: none;
+    font-size: 32px;
+    letter-spacing: 4px;
+}
+
+.menu.show {
+    display: flex;
+}
+
+/* HERO */
+
+.hero {
+    padding: 120px 20px 60px;
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+}
+
+/* SECTIONS */
+
+.section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    font-size: 18px;
+}
+
+/* GALLERY */
+
 .gallery {
     column-count: 3;
     column-gap: 10px;
-    padding: 20px;
 }
 
 .gallery img {
     width: 100%;
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
-.gallery img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: 0.4s;
-}
+
 .gallery img:hover {
-    transform: scale(1.03);
-    opacity: 0.85;
+    opacity: 0.8;
 }
-footer {
-    padding: 30px;
-    font-size: 0.9rem;
-    color: #aaa;
+
+/* BOOKING */
+
+.booking {
+    text-align: center;
+    padding: 100px 20px;
 }
+
+.booking a {
+    color: #f2f2ee;
+    font-size: 20px;
+    text-decoration: none;
+    border-bottom: 1px solid #f2f2ee;
+}
+
+/* CONTACT */
+
+.contact {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.contact div {
+    margin: 12px 0;
+}
+
+/* LIGHTBOX */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox.show {
+    display: flex;
+}
+
+/* MOBILE */
+
+@media(max-width: 800px){
+
+.hero {
+    grid-template-columns: 1fr;
+}
+
+.gallery {
+    column-count: 2;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<header>
-PILLUNEN
-<br>
-<span style="font-size:1rem; letter-spacing:1px;">Photography</span>
-</header>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<section class="gallery">
-<img src="backwordvxd.jpg">
-<img src="doublevxd.jpg">
-<img src="tripplevxd.jpg">
-<img src="upfrontvxd.jpg">
-<img src="vari.jpg">
-<img src="vxdblack.jpg">
-<img src="vxdlayingclose.jpg">
-<img src="vxdlayingfar.jpg">
-<img src="portfolioCONCERTONLY1.jpg">
+<div class="menu" id="menu">
+    <a href="#portraits">PORTRAITS</a>
+    <a href="#streets">STREETS</a>
+    <a href="#concerts">CONCERTS</a>
+    <a href="#couples">COUPLES</a>
+    <a href="#contact">BOOKING & CONTACT</a>
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div>
+<h1>who is pill.unen?</h1>
+<p>sofia pill.unen is a finland-based monochrome photographer exploring faces & places (available worldwide)</p>
+</div>
+
+<img src="me.jpg" alt="pill.unen">
+
 </section>
 
-<footer>
-© 2026 Pillunen Photography
-</footer>
+<!-- PORTRAITS -->
+
+<section class="section" id="portraits">
+<div class="section-title">PORTRAITS</div>
+<div class="gallery">
+
+<img src="portraits/kata (1).jpg">
+<img src="portraits/kata (2).jpg">
+<img src="portraits/kata (3).jpg">
+<img src="portraits/vari.jpg">
+
+</div>
+</section>
+
+<!-- STREETS -->
+
+<section class="section" id="streets">
+<div class="section-title">STREETS</div>
+<div class="gallery">
+
+<img src="streets/paris (1).jpg">
+<img src="streets/paris (2).jpg">
+<img src="streets/paris (3).jpg">
+<img src="streets/paris (4).jpg">
+<img src="streets/paris (5).jpg">
+
+</div>
+</section>
+
+<!-- CONCERTS -->
+
+<section class="section" id="concerts">
+<div class="section-title">CONCERTS</div>
+<div class="gallery">
+
+<img src="concerts/hk11.jpg">
+<img src="concerts/hk12.jpg">
+<img src="concerts/hk13.jpg">
+<img src="concerts/hk14.jpg">
+<img src="concerts/portfolioCONCERTONLY1.jpg">
+
+</div>
+</section>
+
+<!-- COUPLES -->
+
+<section class="section" id="couples">
+<div class="section-title">COUPLES</div>
+<div class="gallery">
+
+<img src="couples/backwordvxd.jpg">
+<img src="couples/doublevxd.jpg">
+<img src="couples/tripplevxd.jpg">
+<img src="couples/upfrontvxd.jpg">
+<img src="couples/vxdblack.jpg">
+<img src="couples/vxdlayingclose.jpg">
+<img src="couples/vxdlayingfar.jpg">
+
+</div>
+</section>
+
+<!-- BOOKING -->
+
+<section class="booking">
+
+<a href="https://calendly.com/ilonasofiavagner/30min" target="_blank">
+book your time slot for a short free <strong>photograph & interview session</strong> →
+</a>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+<div>BOOKING & CONTACT</div>
+
+<div>email<br>ilonasofiavagner@gmail.com</div>
+
+<div>instagram<br>@pill.unen</div>
+
+<div>phone<br>0469053559</div>
+
+<div>location<br>oulu, finland</div>
+
+</section>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<img id="lightbox-img">
+</div>
+
+<script>
+
+function toggleMenu(){
+    document.getElementById('menu').classList.toggle('show');
+}
+
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        lightbox.classList.add('show');
+        lightboxImg.src = img.src;
+    });
+});
+
+function closeLightbox(){
+    lightbox.classList.remove('show');
+}
+
+</script>
 
 </body>
 </html>
+
 
 
 
