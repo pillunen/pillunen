@@ -6,158 +6,124 @@
 
 <title>pill.unen</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* ---------- BASE ---------- */
-
-body {
-    margin: 0;
-    background: #0e0e0e;
-    color: #f2f2ee;
-    font-family: 'Inter Tight', sans-serif;
-    cursor: none;
+body{
+    margin:0;
+    background:#0e0e0e;
+    color:#f2f2ee;
+    font-family:'Inter Tight', sans-serif;
+    cursor:none;
 }
 
-/* ---------- TOP BAR ---------- */
+/* CLOCK */
 
-.topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 20px;
-    z-index: 1000;
-    font-size: 14px;
-    letter-spacing: 2px;
-    background: rgba(14,14,14,0.4);
-    backdrop-filter: blur(6px);
+.clock{
+    position:fixed;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:13px;
+    letter-spacing:2px;
+    z-index:1000;
+    opacity:0.8;
 }
 
-.clock {
-    opacity: 0.8;
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:80px 20px 40px;
 }
 
-/* ---------- MENU BUTTON ---------- */
-
-.menu-btn {
-    position: fixed;
-    top: 50px;
-    left: 20px;
-    font-size: 24px;
-    z-index: 1001;
+h1{
+    letter-spacing:8px;
+    font-weight:300;
 }
 
-/* ---------- MENU ---------- */
+/* MENU */
 
-.menu {
-    position: fixed;
-    inset: 0;
-    background: #0e0e0e;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    z-index: 999;
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    font-size:22px;
+    cursor:pointer;
+    z-index:1001;
 }
 
-.menu a {
-    color: #f2f2ee;
-    text-decoration: none;
-    font-size: 28px;
-    letter-spacing: 4px;
+.menu{
+    position:fixed;
+    top:0;
+    left:-300px;
+    width:260px;
+    height:100%;
+    background:#111;
+    padding:80px 30px;
+    transition:0.4s;
+    z-index:1000;
 }
 
-.menu.show {
-    display: flex;
+.menu a{
+    display:block;
+    margin:18px 0;
+    color:#f2f2ee;
+    text-decoration:none;
+    font-size:18px;
+    letter-spacing:2px;
 }
 
-/* ---------- HERO ---------- */
-
-.hero {
-    padding: 140px 20px 60px;
-    max-width: 1100px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 40px;
-    align-items: center;
+.menu.open{
+    left:0;
 }
 
-.hero h1 {
-    font-size: 38px;
-    margin-bottom: 10px;
+/* GALLERY */
+
+.gallery{
+    column-count:3;
+    column-gap:14px;
+    padding:20px;
 }
 
-.hero p {
-    opacity: 0.85;
+.gallery img{
+    width:100%;
+    margin-bottom:14px;
+    break-inside:avoid;
 }
 
-.hero img {
-    width: 100%;
+/* ABOUT */
+
+.about{
+    display:flex;
+    flex-wrap:wrap;
+    gap:40px;
+    padding:60px 20px;
+    max-width:1000px;
+    margin:auto;
 }
 
-/* ---------- GALLERY ---------- */
-
-.gallery {
-    column-count: 3;
-    column-gap: 10px;
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
+.about img{
+    width:260px;
 }
 
-.gallery img {
-    width: 100%;
-    margin-bottom: 10px;
-    transition: 0.3s;
+.about-text{
+    max-width:500px;
 }
 
-.gallery img:hover {
-    opacity: 0.7;
-}
+/* STAR CURSOR */
 
-/* ---------- BOOKING ---------- */
-
-.booking {
-    text-align: center;
-    padding: 100px 20px;
-}
-
-.booking a {
-    color: #f2f2ee;
-    text-decoration: none;
-    border-bottom: 1px solid #f2f2ee;
-}
-
-/* ---------- CUSTOM CURSOR ---------- */
-
-.cursor {
-    position: fixed;
-    width: 26px;
-    height: 26px;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 2000;
-    filter: drop-shadow(0 0 6px rgba(242,242,238,0.6));
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width:800px){
-
-.hero {
-    grid-template-columns: 1fr;
-}
-
-.gallery {
-    column-count: 2;
-}
-
+.star{
+    width:16px;
+    height:16px;
+    position:fixed;
+    pointer-events:none;
+    background:radial-gradient(circle,#fff 0%,#fff 30%,transparent 70%);
+    border-radius:50%;
+    box-shadow:0 0 8px #fff,0 0 18px #fff;
+    transform:translate(-50%,-50%);
+    z-index:2000;
 }
 
 </style>
@@ -165,96 +131,77 @@ body {
 
 <body>
 
-<!-- TOP BAR -->
-
-<div class="topbar">
-<div>pill.unen</div>
 <div class="clock" id="clock"></div>
-</div>
-
-<!-- MENU BUTTON -->
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<!-- MENU -->
-
 <div class="menu" id="menu">
-<a href="portraits.html">PORTRAITS</a>
-<a href="streets.html">STREETS</a>
-<a href="concerts.html">CONCERTS</a>
-<a href="couples.html">COUPLES</a>
-<a href="contact.html">BOOKING & CONTACT</a>
+<a href="index.html">home</a>
+<a href="portraits.html">portraits</a>
+<a href="streets.html">streets</a>
+<a href="concerts.html">concerts</a>
+<a href="couples.html">couples</a>
+<a href="contact.html">booking & contact</a>
 </div>
 
-<!-- HERO -->
-
-<section class="hero">
-
-<div>
-<h1>who is pill.unen?</h1>
-<p>sofia pill.unen is a finland-based monochrome photographer exploring faces & places (available worldwide)</p>
-</div>
-
-<img src="me1.jpg">
-
-</section>
-
-<!-- FEATURED GALLERY -->
+<header>
+<h1>PILLUNEN</h1>
+<p>photography</p>
+</header>
 
 <section class="gallery">
 
-<img src="couples/vxdblack.jpg">
-<img src="portraits/vari.jpg">
-<img src="concerts/hk11.jpg">
-<img src="streets/paris (1).jpg">
+<img src="couples/backwordvxd.jpg">
 <img src="couples/doublevxd.jpg">
-<img src="concerts/hk12.jpg">
+<img src="couples/tripplevxd.jpg">
+<img src="couples/upfrontvxd.jpg">
+<img src="portraits/vari.jpg">
 
 </section>
 
-<!-- BOOKING -->
+<section class="about">
 
-<section class="booking">
+<img src="me1.jpg">
 
-<a href="https://calendly.com/ilonasofiavagner/30min" target="_blank">
-book your time slot for a short free <strong>photograph & interview session</strong> →
-</a>
+<div class="about-text">
+
+<h2>WHO IS PILL.UNEN?</h2>
+
+<p>
+sofia pill.unen is a finland based monochrome photographer of faces & places
+</p>
+
+</div>
 
 </section>
 
-<!-- CURSOR SVG -->
-
-<svg class="cursor" id="cursor" viewBox="0 0 100 100">
-<path d="M30 10 C20 40 20 70 30 90 C40 95 45 80 45 50 C45 80 50 95 60 90 C70 70 70 40 60 10 Z"
-fill="#f2f2ee"/>
-</svg>
+<div class="star" id="star"></div>
 
 <script>
-
-/* MENU */
-
-function toggleMenu(){
-    document.getElementById('menu').classList.toggle('show');
-}
 
 /* CLOCK */
 
 function updateClock(){
-    const now = new Date();
-    const time = now.toLocaleTimeString();
-    document.getElementById('clock').textContent = time;
+    const now=new Date();
+    const time=now.toLocaleTimeString();
+    document.getElementById("clock").textContent=time;
 }
-
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 updateClock();
+
+/* MENU */
+
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("open");
+}
 
 /* CURSOR */
 
-const cursor = document.getElementById('cursor');
+const star=document.getElementById("star");
 
-document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+document.addEventListener("mousemove",e=>{
+    star.style.left=e.clientX+"px";
+    star.style.top=e.clientY+"px";
 });
 
 </script>
