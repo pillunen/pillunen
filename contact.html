@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>booking & contact — pill.unen</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    background:#0e0e0e;
+    color:#f2f2ee;
+    font-family:'Inter Tight', sans-serif;
+    cursor:none;
+}
+
+/* CLOCK */
+
+.clock{
+    position:fixed;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:13px;
+    letter-spacing:2px;
+    z-index:1000;
+    opacity:0.8;
+}
+
+/* MENU */
+
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    font-size:22px;
+    cursor:pointer;
+    z-index:1001;
+}
+
+.menu{
+    position:fixed;
+    top:0;
+    left:-300px;
+    width:260px;
+    height:100%;
+    background:#111;
+    padding:80px 30px;
+    transition:0.4s;
+    z-index:1000;
+}
+
+.menu a{
+    display:block;
+    margin:18px 0;
+    color:#f2f2ee;
+    text-decoration:none;
+    font-size:18px;
+    letter-spacing:2px;
+}
+
+.menu.open{
+    left:0;
+}
+
+/* CONTENT */
+
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    height:100vh;
+    padding:20px;
+}
+
+h1{
+    letter-spacing:6px;
+    margin-bottom:20px;
+}
+
+p{
+    margin:8px 0;
+}
+
+a{
+    color:#f2f2ee;
+    text-decoration:none;
+}
+
+a:hover{
+    opacity:0.6;
+}
+
+/* BOOK BUTTON */
+
+.book{
+    margin-top:30px;
+    padding:12px 20px;
+    border:1px solid #f2f2ee;
+    display:inline-block;
+}
+
+/* STAR CURSOR */
+
+.star{
+    width:16px;
+    height:16px;
+    position:fixed;
+    pointer-events:none;
+    background:radial-gradient(circle,#fff 0%,#fff 30%,transparent 70%);
+    border-radius:50%;
+    box-shadow:0 0 8px #fff,0 0 18px #fff;
+    transform:translate(-50%,-50%);
+    z-index:2000;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="clock" id="clock"></div>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="menu" id="menu">
+<a href="index.html">home</a>
+<a href="portraits.html">portraits</a>
+<a href="streets.html">streets</a>
+<a href="concerts.html">concerts</a>
+<a href="couples.html">couples</a>
+<a href="contact.html">booking & contact</a>
+</div>
+
+<div class="container">
+
+<h1>booking & contact</h1>
+
+<p>email: ilonasofiavagner@gmail.com</p>
+
+<p>
+instagram:
+<a href="https://www.instagram.com/pill.unen/" target="_blank">
+@pill.unen
+</a>
+</p>
+
+<p>phone: 0469053559</p>
+<p>city: oulu</p>
+
+<a class="book" href="https://calendly.com/ilonasofiavagner/30min" target="_blank">
+book your time slot
+</a>
+
+</div>
+
+<div class="star" id="star"></div>
+
+<script>
+
+/* CLOCK */
+
+function updateClock(){
+    const now=new Date();
+    const time=now.toLocaleTimeString();
+    document.getElementById("clock").textContent=time;
+}
+setInterval(updateClock,1000);
+updateClock();
+
+/* MENU */
+
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("open");
+}
+
+/* CURSOR */
+
+const star=document.getElementById("star");
+
+document.addEventListener("mousemove",e=>{
+    star.style.left=e.clientX+"px";
+    star.style.top=e.clientY+"px";
+});
+
+</script>
+
+</body>
+</html>
