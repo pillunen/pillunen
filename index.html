@@ -6,30 +6,52 @@
 
 <title>pill.unen</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* ---------- BASE ---------- */
 
 body {
     margin: 0;
     background: #0e0e0e;
     color: #f2f2ee;
-    font-family: 'Inter', sans-serif;
-    line-height: 1.5;
+    font-family: 'Inter Tight', sans-serif;
+    cursor: none;
 }
 
-/* MENU BUTTON */
+/* ---------- TOP BAR ---------- */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 20px;
+    z-index: 1000;
+    font-size: 14px;
+    letter-spacing: 2px;
+    background: rgba(14,14,14,0.4);
+    backdrop-filter: blur(6px);
+}
+
+.clock {
+    opacity: 0.8;
+}
+
+/* ---------- MENU BUTTON ---------- */
 
 .menu-btn {
     position: fixed;
-    top: 20px;
+    top: 50px;
     left: 20px;
-    font-size: 26px;
-    cursor: pointer;
-    z-index: 1000;
+    font-size: 24px;
+    z-index: 1001;
 }
 
-/* MENU OVERLAY */
+/* ---------- MENU ---------- */
 
 .menu {
     position: fixed;
@@ -46,7 +68,7 @@ body {
 .menu a {
     color: #f2f2ee;
     text-decoration: none;
-    font-size: 32px;
+    font-size: 28px;
     letter-spacing: 4px;
 }
 
@@ -54,10 +76,10 @@ body {
     display: flex;
 }
 
-/* HERO */
+/* ---------- HERO ---------- */
 
 .hero {
-    padding: 120px 20px 60px;
+    padding: 140px 20px 60px;
     max-width: 1100px;
     margin: auto;
     display: grid;
@@ -72,48 +94,34 @@ body {
 }
 
 .hero p {
-    font-size: 16px;
     opacity: 0.85;
 }
 
 .hero img {
     width: 100%;
-    height: auto;
 }
 
-/* SECTIONS */
-
-.section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.section-title {
-    margin-bottom: 40px;
-    letter-spacing: 4px;
-    font-size: 18px;
-}
-
-/* GALLERY */
+/* ---------- GALLERY ---------- */
 
 .gallery {
     column-count: 3;
     column-gap: 10px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
 }
 
 .gallery img {
     width: 100%;
     margin-bottom: 10px;
-    cursor: pointer;
-    transition: opacity 0.2s;
+    transition: 0.3s;
 }
 
 .gallery img:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
-/* BOOKING */
+/* ---------- BOOKING ---------- */
 
 .booking {
     text-align: center;
@@ -122,46 +130,25 @@ body {
 
 .booking a {
     color: #f2f2ee;
-    font-size: 20px;
     text-decoration: none;
     border-bottom: 1px solid #f2f2ee;
 }
 
-/* CONTACT */
+/* ---------- CUSTOM CURSOR ---------- */
 
-.contact {
-    padding: 80px 20px;
-    text-align: center;
-}
-
-.contact div {
-    margin: 12px 0;
-}
-
-/* LIGHTBOX */
-
-.lightbox {
+.cursor {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    display: none;
-    justify-content: center;
-    align-items: center;
+    width: 26px;
+    height: 26px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
     z-index: 2000;
+    filter: drop-shadow(0 0 6px rgba(242,242,238,0.6));
 }
 
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-}
+/* ---------- MOBILE ---------- */
 
-.lightbox.show {
-    display: flex;
-}
-
-/* MOBILE */
-
-@media(max-width: 800px){
+@media(max-width:800px){
 
 .hero {
     grid-template-columns: 1fr;
@@ -178,14 +165,25 @@ body {
 
 <body>
 
+<!-- TOP BAR -->
+
+<div class="topbar">
+<div>pill.unen</div>
+<div class="clock" id="clock"></div>
+</div>
+
+<!-- MENU BUTTON -->
+
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
+<!-- MENU -->
+
 <div class="menu" id="menu">
-    <a href="#portraits">PORTRAITS</a>
-    <a href="#streets">STREETS</a>
-    <a href="#concerts">CONCERTS</a>
-    <a href="#couples">COUPLES</a>
-    <a href="#contact">BOOKING & CONTACT</a>
+<a href="portraits.html">PORTRAITS</a>
+<a href="streets.html">STREETS</a>
+<a href="concerts.html">CONCERTS</a>
+<a href="couples.html">COUPLES</a>
+<a href="contact.html">BOOKING & CONTACT</a>
 </div>
 
 <!-- HERO -->
@@ -193,74 +191,25 @@ body {
 <section class="hero">
 
 <div>
-<h1>ABOUT</h1>
-<p>sofia is monochrome photographer based in finland
-available worldwide</p>
+<h1>who is pill.unen?</h1>
+<p>sofia pill.unen is a finland-based monochrome photographer exploring faces & places (available worldwide)</p>
 </div>
 
-<img src="em1.jpg" alt="pill.unen">
+<img src="me1.jpg">
 
 </section>
 
-<!-- PORTRAITS -->
+<!-- FEATURED GALLERY -->
 
-<section class="section" id="portraits">
-<div class="section-title">PORTRAITS</div>
-<div class="gallery">
+<section class="gallery">
 
-<img src="portraits/kata (1).jpg">
-<img src="portraits/kata (2).jpg">
-<img src="portraits/kata (3).jpg">
-<img src="portraits/vari.jpg">
-
-</div>
-</section>
-
-<!-- STREETS -->
-
-<section class="section" id="streets">
-<div class="section-title">STREETS</div>
-<div class="gallery">
-
-<img src="streets/paris (1).jpg">
-<img src="streets/paris (2).jpg">
-<img src="streets/paris (3).jpg">
-<img src="streets/paris (4).jpg">
-<img src="streets/paris (5).jpg">
-
-</div>
-</section>
-
-<!-- CONCERTS -->
-
-<section class="section" id="concerts">
-<div class="section-title">CONCERTS</div>
-<div class="gallery">
-
-<img src="concerts/hk11.jpg">
-<img src="concerts/hk12.jpg">
-<img src="concerts/hk13.jpg">
-<img src="concerts/hk14.jpg">
-<img src="concerts/portfolioCONCERTONLY1.jpg">
-
-</div>
-</section>
-
-<!-- COUPLES -->
-
-<section class="section" id="couples">
-<div class="section-title">COUPLES</div>
-<div class="gallery">
-
-<img src="couples/backwordvxd.jpg">
-<img src="couples/doublevxd.jpg">
-<img src="couples/tripplevxd.jpg">
-<img src="couples/upfrontvxd.jpg">
 <img src="couples/vxdblack.jpg">
-<img src="couples/vxdlayingclose.jpg">
-<img src="couples/vxdlayingfar.jpg">
+<img src="portraits/vari.jpg">
+<img src="concerts/hk11.jpg">
+<img src="streets/paris (1).jpg">
+<img src="couples/doublevxd.jpg">
+<img src="concerts/hk12.jpg">
 
-</div>
 </section>
 
 <!-- BOOKING -->
@@ -273,52 +222,42 @@ book your time slot for a short free <strong>photograph & interview session</str
 
 </section>
 
-<!-- CONTACT -->
+<!-- CURSOR SVG -->
 
-<section class="contact" id="contact">
-
-<div>BOOKING & CONTACT</div>
-
-<div>email<br>ilonasofiavagner@gmail.com</div>
-
-<div>instagram<br>@pill.unen</div>
-
-<div>phone<br>0469053559</div>
-
-<div>location<br>oulu, finland</div>
-
-</section>
-
-<!-- LIGHTBOX -->
-
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-<img id="lightbox-img">
-</div>
+<svg class="cursor" id="cursor" viewBox="0 0 100 100">
+<path d="M30 10 C20 40 20 70 30 90 C40 95 45 80 45 50 C45 80 50 95 60 90 C70 70 70 40 60 10 Z"
+fill="#f2f2ee"/>
+</svg>
 
 <script>
+
+/* MENU */
 
 function toggleMenu(){
     document.getElementById('menu').classList.toggle('show');
 }
 
-const images = document.querySelectorAll('.gallery img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
+/* CLOCK */
 
-images.forEach(img => {
-    img.addEventListener('click', () => {
-        lightbox.classList.add('show');
-        lightboxImg.src = img.src;
-    });
-});
-
-function closeLightbox(){
-    lightbox.classList.remove('show');
+function updateClock(){
+    const now = new Date();
+    const time = now.toLocaleTimeString();
+    document.getElementById('clock').textContent = time;
 }
+
+setInterval(updateClock, 1000);
+updateClock();
+
+/* CURSOR */
+
+const cursor = document.getElementById('cursor');
+
+document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
 
 </script>
 
 </body>
 </html>
-
-
