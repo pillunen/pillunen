@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,127 +12,165 @@
 <style>
 
 body{
-    margin:0;
-    background:#0e0e0e;
-    color:#f2f2ee;
-    font-family:'Inter Tight', sans-serif;
-    cursor:none;
+margin:0;
+background:#0e0e0e;
+color:#f2f2ee;
+font-family:'Inter Tight',sans-serif;
+cursor:none;
 }
 
 /* CLOCK */
 
 .clock{
-    position:fixed;
-    top:12px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:13px;
-    letter-spacing:2px;
-    z-index:1000;
-    opacity:0.8;
+position:fixed;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+font-size:13px;
+letter-spacing:2px;
+z-index:1000;
+opacity:0.8;
 }
 
-/* HEADER */
+/* LANGUAGE SWITCH */
 
-header{
-    text-align:center;
-    padding:80px 20px 40px;
+.lang{
+position:fixed;
+top:30px;
+left:50%;
+transform:translateX(-50%);
+font-size:11px;
+letter-spacing:2px;
+z-index:1000;
+opacity:0.7;
 }
 
-h1{
-    letter-spacing:8px;
-    font-weight:300;
+.lang span{
+margin:0 6px;
+cursor:pointer;
 }
 
 /* MENU */
 
 .menu-btn{
-    position:fixed;
-    top:20px;
-    left:20px;
-    font-size:22px;
-    cursor:pointer;
-    z-index:1001;
+position:fixed;
+top:20px;
+left:20px;
+font-size:22px;
+z-index:1001;
+cursor:pointer;
 }
 
 .menu{
-    position:fixed;
-    top:0;
-    left:-300px;
-    width:260px;
-    height:100%;
-    background:#111;
-    padding:80px 30px;
-    transition:0.4s;
-    z-index:1000;
+position:fixed;
+top:0;
+left:-300px;
+width:260px;
+height:100%;
+background:#111;
+padding:80px 30px;
+transition:0.4s;
+z-index:1000;
 }
 
 .menu a{
-    display:block;
-    margin:18px 0;
-    color:#f2f2ee;
-    text-decoration:none;
-    font-size:18px;
-    letter-spacing:2px;
+display:block;
+margin:18px 0;
+color:#f2f2ee;
+text-decoration:none;
+font-size:18px;
+letter-spacing:2px;
 }
 
 .menu.open{
-    left:0;
+left:0;
 }
 
-/* GALLERY */
+/* HEADER */
 
-.gallery{
-    column-count:3;
-    column-gap:14px;
-    padding:20px;
+header{
+text-align:center;
+padding:120px 20px 40px;
+letter-spacing:6px;
 }
 
-.gallery img{
-    width:100%;
-    margin-bottom:14px;
-    break-inside:avoid;
+header h1{
+font-weight:400;
+margin:0;
 }
 
-/* ABOUT */
+header p{
+margin-top:8px;
+font-size:14px;
+opacity:0.7;
+}
+
+/* ABOUT SECTION */
 
 .about{
-    display:flex;
-    flex-wrap:wrap;
-    gap:40px;
-    padding:60px 20px;
-    max-width:1000px;
-    margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:60px;
+padding:80px 20px;
+max-width:1100px;
+margin:auto;
 }
 
 .about img{
-    width:260px;
+width:320px;
+max-width:90%;
 }
 
 .about-text{
-    max-width:500px;
+font-size:28px;
+line-height:1.4;
+max-width:520px;
 }
 
 /* STAR CURSOR */
 
 .star{
-    width:16px;
-    height:16px;
-    position:fixed;
-    pointer-events:none;
-    background:radial-gradient(circle,#fff 0%,#fff 30%,transparent 70%);
-    border-radius:50%;
-    box-shadow:0 0 8px #fff,0 0 18px #fff;
-    transform:translate(-50%,-50%);
-    z-index:2000;
+width:16px;
+height:16px;
+position:fixed;
+pointer-events:none;
+background:radial-gradient(circle,#fff 0%,#fff 30%,transparent 70%);
+border-radius:50%;
+box-shadow:0 0 8px #fff,0 0 18px #fff;
+transform:translate(-50%,-50%);
+z-index:2000;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.about{
+flex-direction:column;
+text-align:center;
+}
+
+.about-text{
+font-size:22px;
+}
+
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="clock" id="clock"></div>
+
+<div class="lang">
+<span onclick="setLang('en')">EN</span> |
+<span onclick="setLang('fi')">FI</span> |
+<span onclick="setLang('ua')">UA</span> |
+<span onclick="setLang('ru')">RU</span>
+</div>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
@@ -149,28 +188,12 @@ h1{
 <p>photography</p>
 </header>
 
-<section class="gallery">
-
-<img src="couples/backwordvxd.jpg">
-<img src="couples/doublevxd.jpg">
-<img src="couples/tripplevxd.jpg">
-<img src="couples/upfrontvxd.jpg">
-<img src="portraits/vari.jpg">
-
-</section>
-
 <section class="about">
 
 <img src="me1.jpg">
 
-<div class="about-text">
-
-<h2>WHO IS PILL.UNEN?</h2>
-
-<p>
-sofia pill.unen is a finland based monochrome photographer of faces & places
-</p>
-
+<div class="about-text" id="aboutText">
+sofia is a monochrome photographer based in finland & available worldwide
 </div>
 
 </section>
@@ -182,17 +205,18 @@ sofia pill.unen is a finland based monochrome photographer of faces & places
 /* CLOCK */
 
 function updateClock(){
-    const now=new Date();
-    const time=now.toLocaleTimeString();
-    document.getElementById("clock").textContent=time;
+const now=new Date();
+const time=now.toLocaleTimeString();
+document.getElementById("clock").textContent=time;
 }
+
 setInterval(updateClock,1000);
 updateClock();
 
 /* MENU */
 
 function toggleMenu(){
-    document.getElementById("menu").classList.toggle("open");
+document.getElementById("menu").classList.toggle("open");
 }
 
 /* CURSOR */
@@ -200,9 +224,22 @@ function toggleMenu(){
 const star=document.getElementById("star");
 
 document.addEventListener("mousemove",e=>{
-    star.style.left=e.clientX+"px";
-    star.style.top=e.clientY+"px";
+star.style.left=e.clientX+"px";
+star.style.top=e.clientY+"px";
 });
+
+/* LANGUAGE */
+
+const translations={
+en:"sofia is a monochrome photographer based in finland & available worldwide",
+fi:"sofia on suomessa asuva mustavalkovalokuvaaja & työskentelee maailmanlaajuisesti",
+ua:"софія — монохромний фотограф з фінляндії & працює по всьому світу",
+ru:"софия — монохромный фотограф из финляндии & работает по всему миру"
+};
+
+function setLang(lang){
+document.getElementById("aboutText").innerText=translations[lang];
+}
 
 </script>
 
