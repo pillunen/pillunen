@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
 <meta charset="UTF-8">
@@ -18,47 +17,25 @@ color:#f2f2ee;
 font-family:'Inter Tight',sans-serif;
 margin:0;
 cursor:none;
-overflow-x:hidden;
+animation:fade .6s;
 }
 
-h1{
-text-align:center;
-font-weight:400;
-letter-spacing:6px;
-margin-top:120px;
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
 }
 
-.subtitle{
-text-align:center;
-opacity:.6;
-margin-bottom:60px;
-}
+/* cursor */
 
-/* clock */
-
-.clock{
+.cursor{
 position:fixed;
-top:15px;
-left:50%;
-transform:translateX(-50%);
-font-size:14px;
-opacity:.7;
-}
-
-/* language */
-
-.languages{
-position:fixed;
-top:35px;
-left:50%;
-transform:translateX(-50%);
-font-size:12px;
-opacity:.7;
-}
-
-.languages span{
-margin:0 6px;
-cursor:pointer;
+width:18px;
+height:18px;
+background:white;
+clip-path:path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4 8 4 9.5 5 10.24 6.36 11 5 12.5 4 14 4 16.5 4 18.5 6 18.5 8.5c0 3.78-3.4 6.86-8.55 11.54z");
+box-shadow:0 0 10px white;
+pointer-events:none;
+z-index:2000;
 }
 
 /* menu */
@@ -86,37 +63,18 @@ z-index:999;
 
 #menu a{
 display:block;
+padding:20px 40px;
 color:#f2f2ee;
 text-decoration:none;
-padding:20px 40px;
-font-size:18px;
 }
-
-#menu a:hover{
-opacity:.6;
-}
-
-/* gallery */
-
-.gallery{
-column-count:3;
-column-gap:20px;
-padding:60px;
-}
-
-.gallery img{
-width:100%;
-margin-bottom:20px;
-}
-
-/* about */
 
 .about{
 display:flex;
 align-items:center;
 justify-content:center;
-padding:120px 60px;
+height:100vh;
 gap:80px;
+padding:40px;
 }
 
 .about img{
@@ -124,54 +82,25 @@ width:420px;
 }
 
 .about-text{
-max-width:400px;
-font-size:22px;
+font-size:28px;
+max-width:420px;
 line-height:1.4;
 }
 
-/* cursor */
-
-.cursor{
+.clock{
 position:fixed;
-width:18px;
-height:18px;
-background:white;
-clip-path:path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4 8 4 9.5 5 10.24 6.36 11 5 12.5 4 14 4 16.5 4 18.5 6 18.5 8.5c0 3.78-3.4 6.86-8.55 11.54z");
-box-shadow:0 0 10px white;
-pointer-events:none;
-}
-
-/* grain */
-
-.grain{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-opacity:.05;
-pointer-events:none;
-background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-}
-
-/* page transition */
-
-.fade{
-animation:fade .6s;
-}
-
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
+top:15px;
+left:50%;
+transform:translateX(-50%);
+font-size:14px;
+opacity:.7;
 }
 
 </style>
-
 </head>
 
-<body class="fade">
+<body>
 
-<div class="grain"></div>
 <div class="cursor" id="cursor"></div>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
@@ -188,32 +117,12 @@ to{opacity:1}
 
 <div class="clock" id="clock"></div>
 
-<div class="languages">
-<span>FI</span>
-<span>UA</span>
-<span>RU</span>
-</div>
-
-<h1>PILL.UNEN</h1>
-
-<div class="subtitle">photography</div>
-
-<div class="gallery">
-
-<img src="couples/backwordvxd.jpg">
-<img src="couples/doublevxd.jpg">
-<img src="portraits/js.jpg">
-
-</div>
-
 <section class="about">
 
 <img src="portraits/me2.jpg">
 
 <div class="about-text">
-
 sofia is a monochrome photographer based in finland & available worldwide
-
 </div>
 
 </section>
@@ -223,33 +132,9 @@ sofia is a monochrome photographer based in finland & available worldwide
 /* menu */
 
 function toggleMenu(){
-
 const menu=document.getElementById("menu");
-
-if(menu.style.left==="0px"){
-menu.style.left="-260px";
-}else{
-menu.style.left="0px";
+menu.style.left = menu.style.left==="0px" ? "-260px" : "0px";
 }
-
-}
-
-/* clock */
-
-function updateClock(){
-
-const now=new Date();
-
-let h=String(now.getHours()).padStart(2,"0");
-let m=String(now.getMinutes()).padStart(2,"0");
-let s=String(now.getSeconds()).padStart(2,"0");
-
-document.getElementById("clock").innerText=h+"."+m+"."+s;
-
-}
-
-setInterval(updateClock,1000);
-updateClock();
 
 /* cursor */
 
@@ -259,6 +144,19 @@ document.addEventListener("mousemove",e=>{
 cursor.style.left=e.clientX+"px";
 cursor.style.top=e.clientY+"px";
 });
+
+/* clock */
+
+function updateClock(){
+const now=new Date();
+let h=String(now.getHours()).padStart(2,"0");
+let m=String(now.getMinutes()).padStart(2,"0");
+let s=String(now.getSeconds()).padStart(2,"0");
+clock.innerText=h+"."+m+"."+s;
+}
+
+setInterval(updateClock,1000);
+updateClock();
 
 </script>
 
