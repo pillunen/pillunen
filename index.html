@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
@@ -25,7 +26,7 @@ from{opacity:0}
 to{opacity:1}
 }
 
-/* cursor */
+/* heart cursor */
 
 .cursor{
 position:fixed;
@@ -33,7 +34,7 @@ width:18px;
 height:18px;
 background:white;
 clip-path:path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4 8 4 9.5 5 10.24 6.36 11 5 12.5 4 14 4 16.5 4 18.5 6 18.5 8.5c0 3.78-3.4 6.86-8.55 11.54z");
-box-shadow:0 0 10px white;
+box-shadow:0 0 12px white;
 pointer-events:none;
 z-index:2000;
 }
@@ -66,7 +67,46 @@ display:block;
 padding:20px 40px;
 color:#f2f2ee;
 text-decoration:none;
+font-size:18px;
 }
+
+#menu a:hover{
+opacity:.6;
+}
+
+/* clock */
+
+.clock{
+position:fixed;
+top:15px;
+left:50%;
+transform:translateX(-50%);
+font-size:14px;
+opacity:.7;
+}
+
+/* languages */
+
+.languages{
+position:fixed;
+top:35px;
+left:50%;
+transform:translateX(-50%);
+font-size:12px;
+letter-spacing:2px;
+opacity:.8;
+}
+
+.languages span{
+margin:0 6px;
+cursor:pointer;
+}
+
+.languages span:hover{
+opacity:.6;
+}
+
+/* about section */
 
 .about{
 display:flex;
@@ -87,34 +127,7 @@ max-width:420px;
 line-height:1.4;
 }
 
-.clock{
-position:fixed;
-top:15px;
-left:50%;
-transform:translateX(-50%);
-font-size:14px;
-opacity:.7;
-}
-
 </style>
-  .languages{
-position:fixed;
-top:40px;
-left:50%;
-transform:translateX(-50%);
-font-size:12px;
-opacity:.8;
-letter-spacing:2px;
-}
-
-.languages span{
-margin:0 6px;
-cursor:pointer;
-}
-
-.languages span:hover{
-opacity:.6;
-}
 </head>
 
 <body>
@@ -125,6 +138,7 @@ opacity:.6;
 
 <div id="menu">
 
+<a href="index.html">home</a>
 <a href="portraits.html">portraits</a>
 <a href="streets.html">streets</a>
 <a href="concerts.html">concerts</a>
@@ -134,7 +148,8 @@ opacity:.6;
 </div>
 
 <div class="clock" id="clock"></div>
-  <div class="languages">
+
+<div class="languages">
 <span onclick="setLang('fi')">FI</span>
 <span onclick="setLang('ua')">UA</span>
 <span onclick="setLang('ru')">RU</span>
@@ -152,14 +167,17 @@ sofia is a monochrome photographer based in finland & available worldwide
 
 <script>
 
-/* menu */
+/* menu toggle */
 
 function toggleMenu(){
+
 const menu=document.getElementById("menu");
+
 menu.style.left = menu.style.left==="0px" ? "-260px" : "0px";
+
 }
 
-/* cursor */
+/* heart cursor */
 
 const cursor=document.getElementById("cursor");
 
@@ -171,15 +189,22 @@ cursor.style.top=e.clientY+"px";
 /* clock */
 
 function updateClock(){
+
 const now=new Date();
+
 let h=String(now.getHours()).padStart(2,"0");
 let m=String(now.getMinutes()).padStart(2,"0");
 let s=String(now.getSeconds()).padStart(2,"0");
+
 clock.innerText=h+"."+m+"."+s;
+
 }
 
 setInterval(updateClock,1000);
 updateClock();
+
+/* language buttons */
+
 function setLang(lang){
 
 if(lang==="fi"){
@@ -200,4 +225,3 @@ alert("Russian version coming soon");
 
 </body>
 </html>
-
