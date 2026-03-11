@@ -1,183 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
 
-<title>couples — pill.unen</title>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>couples</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-    margin:0;
-    background:#0e0e0e;
-    color:#f2f2ee;
-    font-family:'Inter Tight', sans-serif;
-    cursor:none;
+background:#0e0e0e;
+color:#f2f2ee;
+font-family:'Inter Tight',sans-serif;
+margin:0;
+cursor:none;
 }
 
-/* CLOCK */
+/* film grain */
 
-.clock{
-    position:fixed;
-    top:12px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:13px;
-    letter-spacing:2px;
-    z-index:1000;
-    opacity:0.8;
+.grain{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+opacity:.05;
+pointer-events:none;
+background-image:url("https://grainy-gradients.vercel.app/noise.svg");
 }
 
-/* MENU */
+/* heart cursor */
 
-.menu-btn{
-    position:fixed;
-    top:20px;
-    left:20px;
-    font-size:22px;
-    cursor:pointer;
-    z-index:1001;
+.cursor{
+position:fixed;
+width:18px;
+height:18px;
+background:white;
+clip-path:path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4 8 4 9.5 5 10.24 6.36 11 5 12.5 4 14 4 16.5 4 18.5 6 18.5 8.5c0 3.78-3.4 6.86-8.55 11.54z");
+box-shadow:0 0 10px white;
+pointer-events:none;
 }
 
-.menu{
-    position:fixed;
-    top:0;
-    left:-300px;
-    width:260px;
-    height:100%;
-    background:#111;
-    padding:80px 30px;
-    transition:0.4s;
-    z-index:1000;
-}
-
-.menu a{
-    display:block;
-    margin:18px 0;
-    color:#f2f2ee;
-    text-decoration:none;
-    font-size:18px;
-    letter-spacing:2px;
-}
-
-.menu.open{
-    left:0;
-}
-
-/* HEADER */
-
-header{
-    text-align:center;
-    padding:60px 20px 20px;
-}
-
-h1{
-    letter-spacing:6px;
-    font-weight:400;
-}
-
-/* GALLERY */
+/* gallery */
 
 .gallery{
-    column-count:3;
-    column-gap:14px;
-    padding:20px;
+column-count:3;
+column-gap:20px;
+padding:60px;
 }
 
 .gallery img{
-    width:100%;
-    margin-bottom:14px;
-    break-inside:avoid;
+width:100%;
+margin-bottom:20px;
+cursor:pointer;
+filter:blur(10px);
+transition:.6s;
 }
 
-/* STAR CURSOR */
-
-.star{
-    width:16px;
-    height:16px;
-    position:fixed;
-    pointer-events:none;
-    background:radial-gradient(circle,#fff 0%,#fff 30%,transparent 70%);
-    border-radius:50%;
-    box-shadow:0 0 8px #fff,0 0 18px #fff;
-    transform:translate(-50%,-50%);
-    z-index:2000;
+.gallery img.loaded{
+filter:blur(0);
 }
 
-/* MOBILE */
+/* lightbox */
 
-@media(max-width:900px){
-.gallery{column-count:2;}
+#lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.95);
+display:none;
+justify-content:center;
+align-items:center;
 }
 
-@media(max-width:600px){
-.gallery{column-count:1;}
+#lightbox img{
+max-width:90%;
+max-height:90%;
 }
+
+.arrow{
+position:absolute;
+top:50%;
+font-size:40px;
+cursor:pointer;
+}
+
+.left{left:40px}
+.right{right:40px}
 
 </style>
+
 </head>
 
 <body>
 
-<div class="clock" id="clock"></div>
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<div class="gallery" id="gallery"></div>
 
-<div class="menu" id="menu">
-<a href="index.html">home</a>
-<a href="portraits.html">portraits</a>
-<a href="streets.html">streets</a>
-<a href="concerts.html">concerts</a>
-<a href="couples.html">couples</a>
-<a href="contact.html">booking & contact</a>
+<div id="lightbox">
+
+<div class="arrow left" onclick="prev()">‹</div>
+
+<img id="lightbox-img">
+
+<div class="arrow right" onclick="next()">›</div>
+
 </div>
-
-<header>
-<h1>couples</h1>
-</header>
-
-<section class="gallery">
-
-<img src="couples/backwordvxd.jpg">
-<img src="couples/doublevxd.jpg">
-<img src="couples/tripplevxd.jpg">
-<img src="couples/upfrontvxd.jpg">
-<img src="couples/vxdblack.jpg">
-<img src="couples/vxdlayingclose.jpg">
-<img src="couples/vxdlayingfar.jpg">
-
-</section>
-
-<div class="star" id="star"></div>
 
 <script>
 
-/* CLOCK */
+/* couples image list */
 
-function updateClock(){
-    const now=new Date();
-    const time=now.toLocaleTimeString();
-    document.getElementById("clock").textContent=time;
-}
-setInterval(updateClock,1000);
-updateClock();
+const images=[
 
-/* MENU */
+"couples/backwordvxd.jpg",
+"couples/doublevxd.jpg",
+"couples/tripplevxd.jpg",
+"couples/upfrontvxd.jpg",
+"couples/vxdblack.jpg",
+"couples/vxdlayingclose.jpg",
+"couples/vxdlayingfar.jpg"
 
-function toggleMenu(){
-    document.getElementById("menu").classList.toggle("open");
-}
+];
 
-/* CURSOR */
+/* build gallery */
 
-const star=document.getElementById("star");
+const gallery=document.getElementById("gallery");
+
+images.forEach(file=>{
+const img=document.createElement("img");
+img.src=file;
+img.loading="lazy";
+gallery.appendChild(img);
+
+img.onload=()=>img.classList.add("loaded");
+});
+
+/* cursor */
+
+const cursor=document.getElementById("cursor");
 
 document.addEventListener("mousemove",e=>{
-    star.style.left=e.clientX+"px";
-    star.style.top=e.clientY+"px";
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+/* lightbox */
+
+let current=0;
+
+const lightbox=document.getElementById("lightbox");
+const lightImg=document.getElementById("lightbox-img");
+
+document.addEventListener("click",e=>{
+if(e.target.tagName==="IMG" && e.target.parentNode.id==="gallery"){
+current=[...gallery.children].indexOf(e.target);
+open();
+}
+});
+
+function open(){
+lightbox.style.display="flex";
+lightImg.src=images[current];
+}
+
+function next(){
+current=(current+1)%images.length;
+lightImg.src=images[current];
+}
+
+function prev(){
+current=(current-1+images.length)%images.length;
+lightImg.src=images[current];
+}
+
+lightbox.onclick=()=>lightbox.style.display="none";
+
+/* keyboard navigation */
+
+document.addEventListener("keydown",e=>{
+if(e.key==="ArrowRight")next();
+if(e.key==="ArrowLeft")prev();
 });
 
 </script>
