@@ -97,6 +97,24 @@ opacity:.7;
 }
 
 </style>
+  .languages{
+position:fixed;
+top:40px;
+left:50%;
+transform:translateX(-50%);
+font-size:12px;
+opacity:.8;
+letter-spacing:2px;
+}
+
+.languages span{
+margin:0 6px;
+cursor:pointer;
+}
+
+.languages span:hover{
+opacity:.6;
+}
 </head>
 
 <body>
@@ -116,6 +134,11 @@ opacity:.7;
 </div>
 
 <div class="clock" id="clock"></div>
+  <div class="languages">
+<span onclick="setLang('fi')">FI</span>
+<span onclick="setLang('ua')">UA</span>
+<span onclick="setLang('ru')">RU</span>
+</div>
 
 <section class="about">
 
@@ -157,8 +180,24 @@ clock.innerText=h+"."+m+"."+s;
 
 setInterval(updateClock,1000);
 updateClock();
+function setLang(lang){
+
+if(lang==="fi"){
+alert("Finnish version coming soon");
+}
+
+if(lang==="ua"){
+alert("Ukrainian version coming soon");
+}
+
+if(lang==="ru"){
+alert("Russian version coming soon");
+}
+
+}
 
 </script>
 
 </body>
 </html>
+
